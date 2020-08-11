@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.combi.personasapi;
+package com.combi.personasapi.controller;
 
+import com.combi.personasapi.model.Persona;
+import com.combi.personasapi.repository.RepositoryPersonas;
+import com.combi.personasapi.repository.repositoryProductos;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,20 +31,24 @@ public class ControllerPersonas {
     @Autowired
     private RepositoryPersonas repositoryPersonas;
     
+    @Lazy
+    @Autowired
+    private repositoryProductos repositoryProductos;
+    
     @RequestMapping(value = "/personas", method = RequestMethod.GET)
-    public List<ModelPersonas> obtenerPersonas(){
-        List<ModelPersonas> lstPersonas = repositoryPersonas.findAll();
+    public List<Persona> obtenerPersonas(){
+        List<Persona> lstPersonas = repositoryPersonas.findAll();
         return lstPersonas;
     }
     
     @RequestMapping(value = "/personas/{id}", method = RequestMethod.GET)
-    public ModelPersonas obtenerPersona(@PathVariable Long id){
-        Optional<ModelPersonas> persona = repositoryPersonas.findById(id);
+    public Persona obtenerPersona(@PathVariable Long id){
+        Optional<Persona> persona = repositoryPersonas.findById(id);
         return persona.get();
     }
     
     @RequestMapping(value = "/personas", method = RequestMethod.POST)
-    public Boolean guardarPersona(@RequestBody ModelPersonas persona){
+    public Boolean guardarPersona(@RequestBody Persona persona){
         try {
             repositoryPersonas.save(persona);
             return true;
@@ -50,7 +58,7 @@ public class ControllerPersonas {
     }
     
     @RequestMapping(value = "/personas", method = RequestMethod.PUT)
-    public Boolean actualizarPersona(@RequestBody ModelPersonas persona){
+    public Boolean actualizarPersona(@RequestBody Persona persona){
         try {
             repositoryPersonas.save(persona);
             return true;

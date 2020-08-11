@@ -3,34 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.combi.personasapi;
+package com.combi.personasapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  *
  * @author Luis Angel
  */
-
 @Entity
-@Table(name = "personas")
-public class ModelPersonas {
-    
+@Table(name = "productos")
+public class Producto {
+
     @Id
     @Column(name = "id")
     private Long id;
-    
+
     @Column(name = "nombre")
     private String nombre;
-    
-    @Column(name = "direccion")
-    private String direccion;  
-    
-    @Column(name = "telefono")
-    private String telefono;
 
     public Long getId() {
         return id;
@@ -48,20 +44,4 @@ public class ModelPersonas {
         this.nombre = nombre;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-    
 }
